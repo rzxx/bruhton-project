@@ -4,7 +4,7 @@ class prinput():
         if input[0] == "<=":
             return str('print!("{}", ' + input[1] + '); ')
         elif input[0] == "=>":
-            return "!"
+            return f"std::io::stdin().read_line(&mut {input[1]}); "
         else:
             return ""
 

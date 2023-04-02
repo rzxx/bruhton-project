@@ -77,7 +77,7 @@ def createVariable(type, name):
         return f"let mut {name}: f64 = 0.0; "
     elif type == "Bruhing":
         variables[name] = type
-        return f'let mut {name}: String = "".to_string(); '
+        return f'let mut {name}: String = String::new(); '
     else:
         printCompilationError(f"wrong variable type on createVariable step, used: {name} -> {type}")
         return ""
