@@ -1,5 +1,6 @@
 filename = "1.bhtn"
 
+import subprocess
 with open(filename) as F:
     file = F.read()
     file = file.replace("\n", " ")
@@ -10,6 +11,7 @@ def writeRustCode(source):
         F.close()
 
 import modules as bruhtonModules
+import tags as bruhtonTags
 languageWords = [
     "Computer",
     "work",
@@ -110,6 +112,9 @@ for i in file:
     if state == 0:
         if x == "" and i == " ":
             continue
+        elif i == '"':
+            state = 2
+            x += i
         else:
             state = 1
             x += i
@@ -120,6 +125,14 @@ for i in file:
             words.append(x)
             x = ""
         else:
+            x += i
+    elif state == 2:
+        if i == '"':
+            x += i
+            state = 0
+            words.append(bruhtonTags.checkForTags(x))
+            x = ""
+        else:            
             x += i
 if x != "":
     words.append(x)
@@ -149,6 +162,8 @@ for i in words:
         if len(context) == 1:
             if i in varTypes:
                 context.append(i)
+            elif i in modules:
+                context = [i]
             else:
                 printCompilationError(f"waited for variable type, got: {i}")
                 break
@@ -220,3 +235,4 @@ for i in words:
 if state == 99:
     writeRustCode(output)
     print('compilation done! code in "src/main.rs"')
+    subprocess.Popen('cargo run', shell=True)

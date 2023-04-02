@@ -2,7 +2,7 @@ class prinput():
     operators = ["<=", "=>"]
     def returnCode(input):
         if input[0] == "<=":
-            return str('print!("{}", ' + input[1] + ');')
+            return str('print!("{}", ' + input[1] + '); ')
         elif input[0] == "=>":
             return "!"
         else:
