@@ -1,5 +1,5 @@
 /target
-1.bhtn
-src/main.rs
-.vscode
-__pycache__
+/1.bhtn
+/src/main.rs
+/.vscode
+/__pycache__
